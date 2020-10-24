@@ -1,0 +1,48 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+body {
+    margin: 0 !important;
+    background-color: lightgrey !important;
+}
+
+.nav-link {
+    color: #FFFFFF !important;
+}
+
+#logo {
+    float: left;
+    font-size: 1.7em;
+    color: #FFF;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+
+.navbar {
+    margin-bottom: 15px;
+}
+
+.jumbotron {
+    background-image: asset-url('hg22ns81.bmp');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 425px;
+    text-align: center;
+}
+
+.footer {
+    width: 100%;
+    height: 60px; /* Set the fixed height of the footer here */
+    line-height: 60px; /* Vertically center the text there */
+    // background-color: #f5f5f5;
+    text-align: center;
+}
+
+.title-link:hover {
+    background-color: transparent;
+}
+
+#page-content {
+    margin-bottom: 3px;
+}
