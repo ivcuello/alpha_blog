@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Relations
+  has_many :articles
+
+  # Validations
   # Non Null attributes
   validates :email, presence: true
   validates :username, presence: true
