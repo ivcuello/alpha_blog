@@ -1,8 +1,12 @@
 class User < ApplicationRecord
+  before_save { self.email = email.downcase }
+
   # Relations
   has_many :articles
 
   # Validations
+  has_secure_password
+  
   # Non Null attributes
   validates :email, presence: true
   validates :username, presence: true
