@@ -1,0 +1,30 @@
+<div class="container">
+  <% articles.each do |article| %>
+    <div class="row justify-content-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <h5 class="card-header font-italic"><%= article.user.username %></h5>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to article.title, article_path(article), class: 'text-success title-link'%>
+            </h5>
+            <p class="card-text"><%= article.description.truncate(100) %></p>
+            
+            <%= link_to 'View', article_path(article), class: 'btn btn-outline-success' %>
+            <%= link_to 'Edit', edit_article_path(article), class: 'btn btn-outline-info' %>
+            <%= link_to 'Delete', article_path(article), method: :delete, class: 'btn btn-outline-danger' %>
+          </div>
+          <div class="card-footer text-muted">
+            <small title="Created at <%= article.created_at.strftime('%a %d %B %Y %I:%M:%S %p') %>">
+                Created <%= time_ago_in_words(article.created_at) %>,
+            </small>
+
+            <small title="Edited at <%= article.updated_at.strftime('%a %d %B %Y %I:%M:%S %p') %>">
+                Edited <%= time_ago_in_words(article.updated_at) %>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
