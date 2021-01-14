@@ -1,8 +1,8 @@
-class User < ApplicationRecord
+class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
   # Relations
-  has_many :articles
+  has_many :articles, dependent: :destroy
 
   # Validations
   has_secure_password

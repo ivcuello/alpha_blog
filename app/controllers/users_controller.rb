@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [ :show, :edit, :update ]
+  before_action :set_user, only: [ :show, :edit, :update, :destroy ]
+  before_action :require_user, only: [ :update, :edit, :destroy ]
+  before_action :require_same_user, only: [ :update, :edit, :destroy ]
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 5)
   end
 
   def show
+    @articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -18,7 +21,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = "Success. #{@user.username}, your account was updated"
-      redirect_to articles_path
+      redirect_to @user
     else
       render 'edit'
     end
@@ -35,6 +38,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user == @user
+        # Clearing the session
+        session[:user_id] = nil
+    end
+
+    # Deleting the user
+    @user.destroy
+
+    # Setting the message & redirecting to root path
+    flash[:notice] = 'Account & all its articles successfuly deleted'
+
+    # redirect to artivle path
+    redirect_to articles_path
+  end
+
   private
 
   def user_params
@@ -44,4 +63,12 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
+  def require_same_user
+    if current_user != @user && !current_user.admin?
+      flash[:alert] = "You can only edit or delete your own profile"
+      redirect_to user_path(current_user)      
+    end
+  end
+
 end
