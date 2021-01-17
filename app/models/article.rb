@@ -1,7 +1,9 @@
 class Article < ApplicationRecord
   # Relations
   belongs_to :user
-  
+  has_many :article_categories
+  has_many :categories, :through => :article_categories
+
   # Non Null Validations
   validates :title, presence: true
   validates :description, presence: true

@@ -7,8 +7,13 @@
             <h5 class="card-title">
               by <%= @article.user.username if @article.user %>
               <%= link_to gravatar_for(@article.user), user_path(@article.user) %>
+
+              <% if @article.categories.any?  %>
+                  <%= render @article.categories %>
+              <% end %>
+
             </h5>
-            <div class="card-text text-left"><%= simple_format(@article.description) %></div>
+            <div class="card-text text-center"><%= simple_format(@article.description) %></div>
 
             <% if logged_in? && (@article.user == current_user || current_user.admin?) %>
               <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-outline-info' %>

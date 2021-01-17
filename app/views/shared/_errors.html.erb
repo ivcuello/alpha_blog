@@ -4,7 +4,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
 
-        <h4>Errors where found saving the <%= model.class.name.downcase %></h4>
+        <h4 class="alert-heading">Errors where found saving the <%= model.class.name.downcase %></h4>
 
         <ul>
             <% model.errors.full_messages.each do |msg| %>
